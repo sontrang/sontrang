@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">Alarm</string>
+    <string name="clock_fragment_title">Clock</string>
+    <string name="alarm_fragment_title">Alarm</string>
+    <string name="notification">Upcoming Alarm</string>
+    <string name="leftButton">Cancel</string>
+    <string name="rightButton">OK</string>
+    <string name="Label">Label</string>
+    <string name="DurationDialog">Please Choose</string>
+    <string name="Ringtones">Ringtones</string>
+    <string name="never">Never</string>
+    <string name="every_day">Every day</string>
+    <string name="day_concat">", "</string>
+    <string name="start_alarm_service">Start Alarm Service</string>
+    <string name="stop_alarm_service">Stop Alarm Service</string>
+    <string name="repeating_started">Repeating timer started. Starts AlarmService every 30 seconds.</string>
+    <string name="alarm_service_started">The sample service is running.</string>
+    <string name="alarm_service_label">Sample Alarm Service</string>
+    <string name="alarm_service_finished">The sample service is no longer running.</string>
+    <string name="default_label">Nothing to show</string>
+    <string name="repeating_stopped">Repeating timer stopped. AlarmService will no longer be started.</string>
+    <string-array name="Duration_time">
+        <item>None</item>
+        <item>in 15 minutes</item>
+        <item>in 30 minutes</item>
+        <item>in 45 minutes</item>
+        <item>in a hour</item>
+        <item>in two hours</item>
+    </string-array>
+    <string-array name="RingTones">
+        <item>None</item>
+        <item>Ticking</item>
+        <item>Cuckoo</item>
+        <item>Coocoo</item>
+        <item>Loud Alarm</item>
+        <item>Cuckoo bird</item>
+        <item>Tick tock</item>
+        <item>Old clock</item>
+        <item>Old Fashion</item>
+    </string-array>
+    <plurals name="alarm_alert_snooze_duration">
+        <item quantity="one">1 min</item>
+        <item quantity="other"><xliff:g example="7" id="number">%d</xliff:g> min</item>
+    </plurals>
+    <plurals name="alarm_alert_snooze_set">
+        <item quantity="one">Snoozing for 1 minute.</item>
+
+        <item quantity="other">Snoozing for <xliff:g id="minutes">%d</xliff:g> minutes.</item>
+    </plurals>
+    <string name="alarm_alert_off_text">Alarm off</string>
+    <string name="alarm_alert_snoozed_text">Snoozed</string>
+    <string name="description_direction_left">Swipe left to snooze</string>
+    <string name="description_direction_right">Swipe right to dismiss</string>
+    <string name="main_clock_12_hours_format" translatable="false">h&#58;mm&#8202;<b><font face="sans-serif" size="16">a</font></b></string>
+</resources>

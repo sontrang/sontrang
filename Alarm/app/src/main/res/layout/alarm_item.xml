@@ -1,0 +1,168 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LinearLayout">
+
+    <RelativeLayout
+        android:id="@+id/rlAlarm"
+        style="@style/RelativeLayout">
+
+        <TextView
+            android:id="@+id/tvClock"
+            style="@style/TextView"
+            android:textSize="60sp" />
+
+        <ToggleButton
+            android:id="@+id/toActive"
+            style="@style/ToggleButton"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:textOff=""
+            android:textOn=""
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/toggle_active"
+            android:checked="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lnAlarm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/LinearLayout_children">
+
+            <TextView
+                android:id="@+id/tvDuration"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:text="Duration time" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/LinearLayout_children">
+
+            <CheckBox
+                android:id="@+id/cbRepeat"
+                style="@style/CheckBox"
+                android:paddingLeft="15dp"
+                android:text="Repeat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnRepeatDay"
+            style="@style/LinearLayout_children"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toSun"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="S"
+                android:textOn="S" />
+
+            <ToggleButton
+                android:id="@+id/toM"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="M"
+                android:textOn="M" />
+
+            <ToggleButton
+                android:id="@+id/toTu"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="T"
+                android:textOn="T" />
+
+            <ToggleButton
+                android:id="@+id/toW"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="W"
+                android:textOn="W" />
+
+            <ToggleButton
+                android:id="@+id/toTh"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="T"
+                android:textOn="T" />
+
+            <ToggleButton
+                android:id="@+id/toF"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="F"
+                android:textOn="F" />
+
+            <ToggleButton
+                android:id="@+id/toSa"
+                style="@style/ToggleButton"
+                android:background="@drawable/toggle_day"
+                android:checked="false"
+                android:textOff="S"
+                android:textOn="S" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayout_children"
+            android:weightSum="6">
+
+            <ImageView
+                android:id="@+id/imgRing"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ring" />
+
+            <TextView
+                android:id="@+id/tvRingTone"
+                style="@style/TextView"
+                android:layout_width="0dp"
+                android:layout_marginLeft="10dp"
+
+                android:layout_weight="4"
+                android:text="Silent" />
+
+            <CheckBox
+                android:id="@+id/cbVibrate"
+                style="@style/CheckBox"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="15dp"
+                android:text="Vibrate" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/LinearLayout_children">
+
+            <TextView
+                android:id="@+id/tvLabel"
+                style="@style/TextView"
+                android:layout_width="fill_parent"
+                android:text="Label" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnRecycle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/imgDelete"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/delete"></ImageView>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
