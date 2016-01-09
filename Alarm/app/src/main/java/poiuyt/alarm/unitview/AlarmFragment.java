@@ -1,31 +1,29 @@
 package poiuyt.alarm.unitview;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.logging.Logger;
+import java.util.List;
 
 import poiuyt.alarm.R;
+import poiuyt.alarm.activities.AlarmService;
 import poiuyt.alarm.adapters.AlarmFragmentAdapter;
 import poiuyt.alarm.data.AlarmApart;
+import poiuyt.alarm.helpers.DataHelper;
 import poiuyt.alarm.utils.LogUtils;
 
-@SuppressLint("NewApi")
 public class AlarmFragment extends BaseFragment {
     private ImageView imgBtn;
     private View view;
@@ -39,6 +37,7 @@ public class AlarmFragment extends BaseFragment {
         lv = (ListView) view.findViewById(R.id.lvAlarm);
         adapter = new AlarmFragmentAdapter(getActivity(), arrayAlarm);
         lv.setAdapter(adapter);
+
         imgBtn = (ImageView) view.findViewById(R.id.imgBtn);
         imgBtn.setOnClickListener(new OnClickListener() {
 
@@ -49,15 +48,6 @@ public class AlarmFragment extends BaseFragment {
             }
         });
         return view;
-    }
-
-    private void startAlarmService(Context context, Calendar calendar) {
-        LogUtils.d("Starting alarm service: calendar: " + calendar.toString());
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent("startAlarmService");
-        intent.putExtra("Alo", true);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
     TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
@@ -71,8 +61,9 @@ public class AlarmFragment extends BaseFragment {
             calendar.set(Calendar.MINUTE, selectedMinute);
             item.setAlarmTime(calendar);
             arrayAlarm.add(item);
-            adapter.notifyDataSetChanged();
-            startAlarmService(getActivity(), calendar);
+            updateAlarmList();
+            AlarmService.startAlarmService(getContext(), calendar);
+            Toast.makeText(getContext(), item.getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
         }
     };
 
@@ -95,4 +86,27 @@ public class AlarmFragment extends BaseFragment {
         return "";
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateAlarmList();
+    }
+
+    private void updateAlarmList() {
+        DataHelper dataHelper = new DataHelper(getActivity());
+        dataHelper.getInstance(getActivity());
+        final List<AlarmApart> alarms = dataHelper.getAll();
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlarmFragment.this.adapter.notifyDataSetChanged();
+                if (alarms.size() > 0) {
+                    getActivity().findViewById(R.id.noAlarms).setVisibility(View.INVISIBLE);
+                } else {
+                    getActivity().findViewById(R.id.noAlarms).setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
 }

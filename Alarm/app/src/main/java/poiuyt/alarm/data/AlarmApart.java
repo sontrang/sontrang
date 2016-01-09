@@ -14,7 +14,9 @@ public class AlarmApart implements Serializable {
     public int id;
     private Boolean alarActive = true;
     private Calendar alarmTime = Calendar.getInstance();
+//    private enum DurationTime{ };
     private Day[] days = {Day.MONDAY, Day.TUESDAY, Day.WEDNESDAY, Day.THURSDAY, Day.FRIDAY, Day.SATURDAY, Day.SUNDAY};
+    public enum Day{SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY};
     private String repeatDay;
     private String alarmTonePath = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
     private Boolean vibrate = true;
@@ -128,5 +130,31 @@ public class AlarmApart implements Serializable {
         }
 
         return daysStringBuilder.toString();
+    }
+    public String getTimeUntilNextAlarmMessage(){
+        long timeDifference = getAlarmTime().getTimeInMillis() - System.currentTimeMillis();
+        long days = timeDifference / (1000 * 60 * 60 * 24);
+        long hours = timeDifference / (1000 * 60 * 60) - (days * 24);
+        long minutes = timeDifference / (1000 * 60) - (days * 24 * 60) - (hours * 60);
+        long seconds = timeDifference / (1000) - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+        String alert = "Alarm will sound in ";
+        if (days > 0) {
+            alert += String.format(
+                    "%d days, %d hours, %d minutes and %d seconds", days,
+                    hours, minutes, seconds);
+        } else {
+            if (hours > 0) {
+                alert += String.format("%d hours, %d minutes and %d seconds",
+                        hours, minutes, seconds);
+            } else {
+                if (minutes > 0) {
+                    alert += String.format("%d minutes, %d seconds", minutes,
+                            seconds);
+                } else {
+                    alert += String.format("%d seconds", seconds);
+                }
+            }
+        }
+        return alert;
     }
 }

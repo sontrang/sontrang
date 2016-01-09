@@ -1,13 +1,18 @@
 package poiuyt.alarm.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ActionMenuView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,6 @@ import poiuyt.alarm.unitview.ClockFragment;
 public class MainActivity extends BaseActivity {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     ViewPager mViewPager;
     ImageView imgClock, imgAlarm;
     List<Fragment> fragments;
@@ -29,6 +33,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewpager);
+        ActionBar mActionBar = getActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+        View mCustomView = getLayoutInflater().inflate(R.layout.action_bar, null);
+        imgClock = (ImageView) mCustomView.findViewById(R.id.imgclck);
+        imgAlarm = (ImageView) mCustomView.findViewById(R.id.imgAlar);
+        mActionBar.setCustomView(mCustomView, layoutParams);
+        mActionBar.setDisplayShowCustomEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -38,7 +51,9 @@ public class MainActivity extends BaseActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        imgAlarm = (ImageView) findViewById(R.id.imgAlarm);
+
+
+
         imgAlarm.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -46,7 +61,7 @@ public class MainActivity extends BaseActivity {
                 mViewPager.setCurrentItem(0);
             }
         });
-        imgClock = (ImageView) findViewById(R.id.imgclock);
+
         imgClock.setOnClickListener(new OnClickListener() {
 
             @Override

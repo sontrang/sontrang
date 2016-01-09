@@ -1,6 +1,5 @@
 package poiuyt.alarm.adapters;
 
-import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -30,7 +29,7 @@ import poiuyt.alarm.unitview.LabelDialog;
 import poiuyt.alarm.unitview.LabelDialog.LcallBack;
 import poiuyt.alarm.unitview.RingToneDialog;
 
-@SuppressLint({"SimpleDateFormat", "InflateParams", "NewApi"})
+
 public class AlarmFragmentAdapter extends BaseAdapter {
     private static final String DATE_TIME_FORMAT = "HH:mm";
     private Context mContext;
@@ -53,6 +52,7 @@ public class AlarmFragmentAdapter extends BaseAdapter {
         final LinearLayout lnRecycle, lnRepeatDay, lnAlarm;
         RelativeLayout rlAlarm;
         View view;
+
         if (convertView != null) {
             view = convertView;
         } else {
@@ -65,6 +65,7 @@ public class AlarmFragmentAdapter extends BaseAdapter {
         final Calendar calendar = arrayAlarm.get(position).getAlarmTime();
         final SimpleDateFormat fm = new SimpleDateFormat(DATE_TIME_FORMAT);
         tvClock.setText(fm.format(calendar.getTime()));
+
         final TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int selectHour, int selectMinute) {
@@ -222,23 +223,6 @@ public class AlarmFragmentAdapter extends BaseAdapter {
                 }).show();
             }
         });
-
-//            @Override
-//            public void onClick(DialogInterface dialog, int item) {
-//                Uri path = Uri.parse("android.resource://hom.sample.alarmsample/raw/");
-//                switch (item) {
-//                    case 0:
-//                        RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE, path);
-//                        //RingtoneManager.getRingtone(getApplicationContext(), path).play();
-//                        Log.d("RutaTONO", RingtoneManager.getActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE).toString());
-//                        break;
-//                    case 1:
-//                        RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION, path);
-//                        break;
-//                    case 2:
-//                        RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM, path);
-//                        break;
-//                }
 
 
         cbVibravate = (CheckBox) view.findViewById(R.id.cbVibrate);
