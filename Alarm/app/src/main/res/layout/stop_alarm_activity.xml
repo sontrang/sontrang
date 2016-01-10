@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayout">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearLayout"
+    tools:context=".StopAlarmActivity">
 
     <LinearLayout
         style="@style/LinearLayout"
@@ -21,44 +23,47 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/digital_clock"
+            android:id="@+id/tvClock"
             style="@style/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="0000"
             android:textColor="@android:color/white"
             android:textSize="65dp" />
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:gravity="center_vertical">
 
-        <Button
-            android:id="@+id/snooze"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/snooze"
-            android:layout_marginTop="118dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="106dp" />
+            android:layout_weight=".5"
+            android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/dismiss"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/snooze"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/snooze" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/alarm_off"
-            android:layout_marginEnd="61dp"
-            android:layout_alignTop="@+id/snooze"
-            android:layout_alignParentEnd="true" />
+            android:layout_weight=".5"
+            android:gravity="center_horizontal">
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/dissmiss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/alarm_off" />
+        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

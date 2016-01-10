@@ -1,5 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayout">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearLayout"
+    tools:context=".AlarmFragmentAdapter">
 
     <RelativeLayout
         android:id="@+id/rlAlarm"

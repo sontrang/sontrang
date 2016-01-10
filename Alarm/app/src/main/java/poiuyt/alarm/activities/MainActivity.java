@@ -19,8 +19,10 @@ import java.util.List;
 
 import poiuyt.alarm.R;
 import poiuyt.alarm.adapters.SectionsPagerAdapter;
+import poiuyt.alarm.helpers.DataHelper;
 import poiuyt.alarm.unitview.AlarmFragment;
 import poiuyt.alarm.unitview.ClockFragment;
+import poiuyt.alarm.utils.AlarmAlertWakeLock;
 
 public class MainActivity extends BaseActivity {
 
@@ -33,11 +35,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewpager);
+
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
         View mCustomView = getLayoutInflater().inflate(R.layout.action_bar, null);
+
+        DataHelper dataHelper = new DataHelper(getApplicationContext());
+
         imgClock = (ImageView) mCustomView.findViewById(R.id.imgclck);
         imgAlarm = (ImageView) mCustomView.findViewById(R.id.imgAlar);
         mActionBar.setCustomView(mCustomView, layoutParams);
@@ -51,7 +57,6 @@ public class MainActivity extends BaseActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
 
 
         imgAlarm.setOnClickListener(new OnClickListener() {
@@ -99,4 +104,8 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }

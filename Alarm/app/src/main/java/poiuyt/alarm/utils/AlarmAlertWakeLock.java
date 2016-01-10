@@ -31,10 +31,4 @@ public class AlarmAlertWakeLock {
         sCpuWakeLock.acquire();
     }
 
-    public static void releaseCpuLock() {
-        if (sCpuWakeLock != null) {
-            sCpuWakeLock.release();
-            sCpuWakeLock = null;
-        }
-    }
 }

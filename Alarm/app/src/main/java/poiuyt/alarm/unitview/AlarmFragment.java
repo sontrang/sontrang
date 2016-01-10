@@ -30,10 +30,13 @@ public class AlarmFragment extends BaseFragment {
     private ListView lv;
     private ArrayList<AlarmApart> arrayAlarm = new ArrayList<AlarmApart>();
     private AlarmFragmentAdapter adapter;
+    public DataHelper dataHelper= new DataHelper(getActivity());
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.alarm_pager, container, false);
+
         lv = (ListView) view.findViewById(R.id.lvAlarm);
         adapter = new AlarmFragmentAdapter(getActivity(), arrayAlarm);
         lv.setAdapter(adapter);
@@ -62,7 +65,8 @@ public class AlarmFragment extends BaseFragment {
             item.setAlarmTime(calendar);
             arrayAlarm.add(item);
             updateAlarmList();
-            AlarmService.startAlarmService(getContext(), calendar);
+            String str= item.getAlarmTimeString();
+            AlarmService.startAlarmService(getContext(), calendar, str);
             Toast.makeText(getContext(), item.getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
         }
     };
@@ -93,10 +97,8 @@ public class AlarmFragment extends BaseFragment {
     }
 
     private void updateAlarmList() {
-        DataHelper dataHelper = new DataHelper(getActivity());
         dataHelper.getInstance(getActivity());
         final List<AlarmApart> alarms = dataHelper.getAll();
-
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {

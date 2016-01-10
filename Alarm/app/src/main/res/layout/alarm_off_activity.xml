@@ -4,9 +4,10 @@
 
     <TextView
         style="@style/TextView"
-        android:text="Alarm Off"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="65sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Alarm Off"
+        android:textSize="65sp" />
 </LinearLayout>

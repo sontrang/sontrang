@@ -1,6 +1,8 @@
 package poiuyt.alarm.utils;
 
 public class Constants {
+
+
     private Constants() {
         // we don't want to initiate any instance
     }
@@ -34,4 +36,5 @@ public class Constants {
 
         }
     }
+
 }
