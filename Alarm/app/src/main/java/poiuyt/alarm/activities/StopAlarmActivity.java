@@ -21,9 +21,7 @@ public class StopAlarmActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stop_alarm_activity);
 
-        Intent intent = getIntent();
         tv = (TextView) findViewById(R.id.tvClock);
-        tv.setText(intent.getStringExtra("strTime"));
         snooze = (Button) findViewById(R.id.snooze);
 
         snooze.setOnClickListener(new View.OnClickListener() {

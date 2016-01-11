@@ -3,26 +3,19 @@ package poiuyt.alarm.activities;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ActionMenuView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import poiuyt.alarm.R;
 import poiuyt.alarm.adapters.SectionsPagerAdapter;
-import poiuyt.alarm.helpers.DataHelper;
 import poiuyt.alarm.unitview.AlarmFragment;
 import poiuyt.alarm.unitview.ClockFragment;
-import poiuyt.alarm.utils.AlarmAlertWakeLock;
 
 public class MainActivity extends BaseActivity {
 
@@ -41,8 +34,6 @@ public class MainActivity extends BaseActivity {
         mActionBar.setDisplayShowTitleEnabled(false);
         ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
         View mCustomView = getLayoutInflater().inflate(R.layout.action_bar, null);
-
-        DataHelper dataHelper = new DataHelper(getApplicationContext());
 
         imgClock = (ImageView) mCustomView.findViewById(R.id.imgclck);
         imgAlarm = (ImageView) mCustomView.findViewById(R.id.imgAlar);

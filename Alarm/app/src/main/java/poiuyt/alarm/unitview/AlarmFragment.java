@@ -30,7 +30,7 @@ public class AlarmFragment extends BaseFragment {
     private ListView lv;
     private ArrayList<AlarmApart> arrayAlarm = new ArrayList<AlarmApart>();
     private AlarmFragmentAdapter adapter;
-    public DataHelper dataHelper= new DataHelper(getActivity());
+    public DataHelper dataHelper = new DataHelper(getActivity());
 
 
     @Override
@@ -63,10 +63,10 @@ public class AlarmFragment extends BaseFragment {
             calendar.set(Calendar.HOUR_OF_DAY, selectedHour);
             calendar.set(Calendar.MINUTE, selectedMinute);
             item.setAlarmTime(calendar);
+            dataHelper.addItem(item);
             arrayAlarm.add(item);
             updateAlarmList();
-            String str= item.getAlarmTimeString();
-            AlarmService.startAlarmService(getContext(), calendar, str);
+            AlarmService.startAlarmService(getContext(), calendar);
             Toast.makeText(getContext(), item.getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
         }
     };
@@ -93,11 +93,11 @@ public class AlarmFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateAlarmList();
+//        updateAlarmList();
     }
 
     private void updateAlarmList() {
-        dataHelper.getInstance(getActivity());
+//        dataHelper.getInstance(getActivity());
         final List<AlarmApart> alarms = dataHelper.getAll();
         getActivity().runOnUiThread(new Runnable() {
             @Override

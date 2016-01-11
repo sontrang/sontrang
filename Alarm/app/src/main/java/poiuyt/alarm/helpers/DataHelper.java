@@ -43,40 +43,41 @@ public class DataHelper extends SQLiteOpenHelper {
             + COLUMN_ALARMPLUS_VIBRATE + TEXT_TYPE + COMMA_SEP
             + COLUMN_ALARMPLUS_LABEL + TEXT_TYPE + COMMA_SEP + TEXT_TYPE + ");";
 
-    private  DataHelper instance = null;
-    private  SQLiteDatabase database = null;
+//    private DataHelper instance=null;
+//    private SQLiteDatabase database=null;
 
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+//
+//    public DataHelper getInstance(Context context) {
+//        if (instance == null) {
+//            instance = new DataHelper(context);
+//        }
+//        return instance;
+//    }
 
-    public DataHelper getInstance(Context context) {
-        if (instance == null) {
-            instance = new DataHelper(context);
-        }
-        return instance;
-    }
 
-    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DATABASE_TABLE_CREATE);
     }
+//
+//    public SQLiteDatabase getDatabase() {
+////        if (null == database)
+////            database = instance.getWritableDatabase();
+//        return database;
+//    }
 
-    public SQLiteDatabase getDatabase() {
-        if (database == null)
-            database = instance.getWritableDatabase();
-        return database;
-    }
+//    public void deActive() {
+//        if (null != database && database.isOpen()) {
+//            database.close();
+//        }
+//        database = null;
+//        instance = null;
+//    }
 
-    public void deActive() {
-        if (null != database && database.isOpen()) {
-            database.close();
-        }
-        database = null;
-        instance = null;
-    }
-
-    public long create(AlarmApart alarm) {
+    public long addItem(AlarmApart alarm) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_ALARMPLUS_ACTIVE, alarm.getAlarmActive());
         cv.put(COLUMN_ALARMPLUS_TIME, alarm.getAlarmTimeString());
@@ -98,7 +99,7 @@ public class DataHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ALARMPLUS_VIBRATE, alarm.getVibrate());
         cv.put(COLUMN_ALARMPLUS_LABEL, alarm.getAlarmLabel());
 
-        return getDatabase().insert(ALARMPLUS_TABLE, null, cv);
+        return db.insert(ALARMPLUS_TABLE, null, cv);
     }
 
 
@@ -107,6 +108,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     public int update(AlarmApart alarm) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_ALARMPLUS_ACTIVE, alarm.getAlarmActive());
         cv.put(COLUMN_ALARMPLUS_TIME, alarm.getAlarmTimeString());
@@ -128,7 +130,7 @@ public class DataHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ALARMPLUS_VIBRATE, alarm.getVibrate());
         cv.put(COLUMN_ALARMPLUS_LABEL, alarm.getAlarmLabel());
 
-        return getDatabase().update(ALARMPLUS_TABLE, cv,
+        return db.update(ALARMPLUS_TABLE, cv,
                 "_id=" + alarm.getId(), null);
     }
 
@@ -137,14 +139,17 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     public int deleteEntry(int id) {
-        return getDatabase().delete(ALARMPLUS_TABLE, COLUMN_ALARMPLUS_ID + "=" + id, null);
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(ALARMPLUS_TABLE, COLUMN_ALARMPLUS_ID + "=" + id, null);
     }
 
     public int deleteAll() {
-        return getDatabase().delete(ALARMPLUS_TABLE, "1", null);
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(ALARMPLUS_TABLE, "1", null);
     }
 
     public AlarmApart getAlarm(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = new String[]{
                 COLUMN_ALARMPLUS_ID,
                 COLUMN_ALARMPLUS_ACTIVE,
@@ -155,7 +160,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 COLUMN_ALARMPLUS_VIBRATE,
                 COLUMN_ALARMPLUS_LABEL
         };
-        Cursor c = getDatabase().query(ALARMPLUS_TABLE, columns, COLUMN_ALARMPLUS_ID + "=" + id, null, null, null,
+        Cursor c = db.query(ALARMPLUS_TABLE, columns, COLUMN_ALARMPLUS_ID + "=" + id, null, null, null,
                 null);
         AlarmApart alarm = null;
 
@@ -193,6 +198,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getCursor() {
+        SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = new String[]{
                 COLUMN_ALARMPLUS_ID,
                 COLUMN_ALARMPLUS_ACTIVE,
@@ -203,13 +209,14 @@ public class DataHelper extends SQLiteOpenHelper {
                 COLUMN_ALARMPLUS_VIBRATE,
                 COLUMN_ALARMPLUS_LABEL
         };
-        return getDatabase().query(ALARMPLUS_TABLE, columns, null, null, null, null, null);
+        return db.query(ALARMPLUS_TABLE, columns, null, null, null, null, null);
     }
 
     public List<AlarmApart> getAll() {
+
         List<AlarmApart> alarms = new ArrayList<AlarmApart>();
 
-        Cursor cursor =getCursor();
+        Cursor cursor = getCursor();
         if (cursor.moveToFirst()) {
 
             do {

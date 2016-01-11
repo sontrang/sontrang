@@ -26,14 +26,11 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         LogUtils.d("Alarm Received");
         this.context = context;
         LogUtils.d(intent.getBooleanExtra("Alo", false) + "Test EveryWhere");
-        Bundle bundle = intent.getExtras();
-        String strTime = (String) bundle.get("strTime");
 
         Uri alarmUri = RingtoneManager
                 .getDefaultUri(RingtoneManager.TYPE_ALARM);
 
         Intent mStartStopAlarmActivity = new Intent(context, StopAlarmActivity.class);
-        mStartStopAlarmActivity.putExtra("strTime", strTime);
 
         PendingIntent mPendingIntent = PendingIntent.getActivity(context, 1, mStartStopAlarmActivity, PendingIntent.FLAG_ONE_SHOT);
         Notification.Builder notificationBuilder = new Notification.Builder(context)
