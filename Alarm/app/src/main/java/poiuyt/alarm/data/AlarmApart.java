@@ -14,47 +14,47 @@ public class AlarmApart implements Serializable {
     private static final String DATE_TIME_FORMAT = "HH:mm";
     final SimpleDateFormat fm = new SimpleDateFormat(DATE_TIME_FORMAT);
     public int id;
-    private Boolean alarActive = true;
-    private Calendar alarmTime;
+    private Boolean active = true;
+    private Calendar time;
     //            = Calendar.getInstance();
     private Day[] days = {Day.MONDAY, Day.TUESDAY, Day.WEDNESDAY, Day.THURSDAY, Day.FRIDAY, Day.SATURDAY, Day.SUNDAY};
 
     public enum Day {SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY}
 
     private String repeatDay;
-    private String alarmTonePath = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
+    private String tonePath = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
     private Boolean vibrate = true;
-    private String alarmLabel = "";
+    private String label = "";
 
-    public Boolean getAlarmActive() {
-        return alarActive;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setAlarmActive(Boolean alarmActive) {
-        this.alarActive = alarmActive;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public Calendar getAlarmTime() {
-        if (alarmTime.before(Calendar.getInstance()))
-            alarmTime.add(Calendar.DAY_OF_MONTH, 1);
-        while (!Arrays.asList(getDays()).contains(Day.values()[alarmTime.get(Calendar.DAY_OF_WEEK) - 1])) {
-            alarmTime.add(Calendar.DAY_OF_MONTH, 1);
+    public Calendar getTime() {
+        if (time.before(Calendar.getInstance()))
+            time.add(Calendar.DAY_OF_MONTH, 1);
+        while (!Arrays.asList(getDays()).contains(Day.values()[time.get(Calendar.DAY_OF_WEEK) - 1])) {
+            time.add(Calendar.DAY_OF_MONTH, 1);
         }
-        return alarmTime;
+        return time;
     }
 
-    public void setAlarmTime(Calendar alarmTime) {
-        this.alarmTime = alarmTime;
+    public void setTime(Calendar time) {
+        this.time = time;
     }
 
-    public String getAlarmTimeString() {
-        return fm.format(alarmTime.getTime());
+    public String getTimeString() {
+        return fm.format(time.getTime());
     }
 
 
-    public void setAlarmTime(String alarmTime) {
+    public void setTime(String time) {
         Calendar calendar = Calendar.getInstance();
-        setAlarmTime(fm.format(calendar.getTime()));
+        setTime(fm.format(calendar.getTime()));
     }
 
     public Day[] getDays() {
@@ -66,12 +66,12 @@ public class AlarmApart implements Serializable {
     }
 
 
-    public String getAlarmTonePath() {
-        return alarmTonePath;
+    public String getTonePath() {
+        return tonePath;
     }
 
-    public void setAlarmTonePath(String alarmTonePath) {
-        this.alarmTonePath = alarmTonePath;
+    public void setTonePath(String tonePath) {
+        this.tonePath = tonePath;
     }
 
     public Boolean getVibrate() {
@@ -82,12 +82,12 @@ public class AlarmApart implements Serializable {
         this.vibrate = vibrate;
     }
 
-    public String getAlarmLabel() {
-        return alarmLabel;
+    public String getLabel() {
+        return label;
     }
 
-    public void setAlarmLabel(String AlarmLabel) {
-        this.alarmLabel = AlarmLabel;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public int getId() {
@@ -127,18 +127,16 @@ public class AlarmApart implements Serializable {
     }
 
     public String getTimeUntilNextAlarmMessage() {
-        long timeDifference = getAlarmTime().getTimeInMillis() - System.currentTimeMillis();
+        long timeDifference = getTime().getTimeInMillis() - System.currentTimeMillis();
         long days = timeDifference / (1000 * 60 * 60 * 24);
         long hours = timeDifference / (1000 * 60 * 60) - (days * 24);
         long minutes = timeDifference / (1000 * 60) - (days * 24 * 60) - (hours * 60);
-        long seconds = timeDifference / (1000) - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
         String alert = "Alarm set for ";
         if (days > 0) {
-            alert += String.format(
-                    "%d days, %d hours, %d minutes", days,hours, minutes);
+            alert += String.format(  "%d days, %d hours, %d minutes", days, hours, minutes);
         } else {
             if (hours > 0) {
-                alert += String.format("%d hours and %d minutes",  hours, minutes);
+                alert += String.format("%d hours and %d minutes", hours, minutes);
             } else {
                 if (minutes > 0) {
                     alert += String.format("%d minutes", minutes);

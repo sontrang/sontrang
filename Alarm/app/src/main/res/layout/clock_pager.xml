@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/LinearLayout">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3773B2">
 
-    <LinearLayout
+    <AnalogClock
+        android:id="@+id/clk"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
-        <DigitalClock
-            android:id="@+id/clk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="80dp" />
-    </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvClockDate"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/clk"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tvClockDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
-    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

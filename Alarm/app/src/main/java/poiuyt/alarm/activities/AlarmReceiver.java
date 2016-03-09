@@ -6,10 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -30,6 +32,16 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         Uri alarmUri = RingtoneManager
                 .getDefaultUri(RingtoneManager.TYPE_ALARM);
 
+        if (alarmUri == null) {
+            alarmUri = RingtoneManager
+                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        }
+//        LogUtils.d("alarmUri: " + alarmUri.toString());
+//        Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
+//        ringtone.play();
+
+
+
         Intent mStartStopAlarmActivity = new Intent(context, StopAlarmActivity.class);
 
         PendingIntent mPendingIntent = PendingIntent.getActivity(context, 1, mStartStopAlarmActivity, PendingIntent.FLAG_ONE_SHOT);
@@ -45,13 +57,6 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1, notificationBuilder.build());
 
-//        if (alarmUri == null) {
-//            alarmUri = RingtoneManager
-//                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//        }
-//        LogUtils.d("alarmUri: " + alarmUri.toString());
-//        Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
-//        ringtone.play();
 
         setResultCode(Activity.RESULT_OK);
     }

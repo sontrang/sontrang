@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AnalogClock;
 import android.widget.DigitalClock;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import poiuyt.alarm.R;
 
 public class ClockFragment extends BaseFragment {
 
-    DigitalClock clk;
+    AnalogClock clk;
     View view;
     TextView mTimeDisplay;
     private Date date;
@@ -29,7 +30,7 @@ public class ClockFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.clock_pager, container, false);
-        clk = (DigitalClock) view.findViewById(R.id.clk);
+        clk = (AnalogClock) view.findViewById(R.id.clk);
         date = new Date();
         fm = new SimpleDateFormat(DATE_FOMAT);
         mTimeDisplay = (TextView) view.findViewById(R.id.tvClockDate);
