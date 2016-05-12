@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class ListOfMusicAdapter extends BaseAdapter {
 
+
+
     Context context;
     ArrayList<String> arrayList;
 
