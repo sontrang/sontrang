@@ -10,6 +10,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fList;
 
+
+
     public SectionsPagerAdapter(FragmentManager fm, List<Fragment> fList) {
         super(fm);
         this.fList = fList;
