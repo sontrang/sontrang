@@ -18,29 +18,28 @@ import java.util.List;
 
 import poiuyt.alarm.R;
 import poiuyt.alarm.activities.AlarmService;
-import poiuyt.alarm.data.AlarmApart;
-import poiuyt.alarm.helpers.DataHelper;
+import poiuyt.alarm.model.Alarm;
 import poiuyt.alarm.utils.LogUtils;
 
 public class AlarmFragment extends BaseFragment {
     private ImageView imgBtn;
     private View view;
     private ListView lv;
-    private ArrayList<AlarmApart> arrayAlarm = new ArrayList<AlarmApart>();
-    private AlarmFragmentAdapter adapter;
+    private ArrayList<Alarm> arrayAlarm = new ArrayList<Alarm>();
+    private  FragmentAdapter adapter;
 
-    AlarmFragmentAdapter.Icallback callback = new AlarmFragmentAdapter.Icallback() {
+     FragmentAdapter.Icallback callback = new  FragmentAdapter.Icallback() {
         @Override
         public void updateAlarmList() {
-//            DataHelper dataHelper= new DataHelper(getActivity());
-            final List<AlarmApart> alarms =arrayAlarm;
+            final List<Alarm> alarms =arrayAlarm;
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     AlarmFragment.this.adapter.notifyDataSetChanged();
                     if (alarms.size() > 0) {
                         getActivity().findViewById(R.id.noAlarms).setVisibility(View.INVISIBLE);
-                    } else {
+                    }
+                    else {
                         getActivity().findViewById(R.id.noAlarms).setVisibility(View.VISIBLE);
                     }
                 }
@@ -51,29 +50,26 @@ public class AlarmFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.alarm_pager, container, false);
-         final DataHelper dataHelper= new DataHelper(getActivity());
-
 
         final TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
 
             @Override
             public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
                 LogUtils.d("onTimeSet");
-                AlarmApart item = new AlarmApart();
+                Alarm item = new Alarm();
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(Calendar.HOUR_OF_DAY, selectedHour);
                 calendar.set(Calendar.MINUTE, selectedMinute);
-                item.setTime(calendar);
+
+                item.setTime(calendar.getTime());
                 arrayAlarm.add(item);
-                dataHelper.addItem(item);
                 callback.updateAlarmList();
                 AlarmService.startAlarmService(getContext(), calendar);
-                Toast.makeText(getContext(), item.getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
             }
         };
 
         lv = (ListView) view.findViewById(R.id.lvAlarm);
-        adapter = new AlarmFragmentAdapter(getActivity(), arrayAlarm, callback);
+        adapter = new  FragmentAdapter(getActivity(), arrayAlarm, callback);
         lv.setAdapter(adapter);
 
         imgBtn = (ImageView) view.findViewById(R.id.imgBtn);

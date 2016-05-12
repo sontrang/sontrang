@@ -18,6 +18,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:visibility=""
             android:id="@+id/noAlarmsImage"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"

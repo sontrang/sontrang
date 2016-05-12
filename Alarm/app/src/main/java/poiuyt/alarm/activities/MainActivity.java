@@ -33,8 +33,8 @@ public class MainActivity extends BaseActivity {
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-        View mCustomView = getLayoutInflater().inflate(R.layout.action_bar, null);
 
+        View mCustomView = getLayoutInflater().inflate(R.layout.action_bar, null);
         imgClock = (ImageView) mCustomView.findViewById(R.id.imgclck);
         imgAlarm = (ImageView) mCustomView.findViewById(R.id.imgAlar);
         mActionBar.setCustomView(mCustomView, layoutParams);
@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                mViewPager.setCurrentItem(0);
+                mViewPager.setCurrentItem(1);
             }
         });
 
@@ -62,15 +62,16 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                mViewPager.setCurrentItem(1);
+                mViewPager.setCurrentItem(0);
             }
         });
     }
 
     private List<Fragment> getFragment() {
         List<Fragment> fList = new ArrayList<Fragment>();
-        fList.add(ClockFragment.newInstance(1, "1"));
-        fList.add(AlarmFragment.newInstance(0, "0"));
+
+        fList.add(ClockFragment.newInstance(1, "alarm"));
+        fList.add(AlarmFragment.newInstance(0, "alarm"));
         return fList;
     }
 

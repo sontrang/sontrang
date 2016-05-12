@@ -4,6 +4,8 @@ package poiuyt.alarm.activities;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.io.Serializable;
+
 import poiuyt.alarm.R;
 
 public class AlarmOffActivity extends Activity{

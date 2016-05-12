@@ -1,15 +1,24 @@
 package poiuyt.alarm.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+
 public class Constants {
 
+    private static final String DATE_TIME_FORMAT = "HH:mm";
+    final SimpleDateFormat fm = new SimpleDateFormat(DATE_TIME_FORMAT);
+    public int id;
 
-    private Constants() {
+      private Constants() {
         // we don't want to initiate any instance
     }
+
 
     public enum DurationTime {
         QUARTER, AHALF, QUAHAL, AHOUR, TWOHOUR
     }
+
 
     public enum Day {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
@@ -36,5 +45,7 @@ public class Constants {
 
         }
     }
+
+
 
 }
