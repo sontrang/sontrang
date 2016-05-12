@@ -24,6 +24,8 @@ public class MainActivity extends BaseActivity {
     ImageView imgClock, imgAlarm;
     List<Fragment> fragments;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
